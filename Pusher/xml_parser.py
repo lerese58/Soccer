@@ -12,18 +12,11 @@ class ParserXml:
         self.root = tree.getroot()
 
     def get_posts(self):
-        news = []
+        posts = []
         for elem in self.root:
             for item_elem in elem.findall("item"):
                 post = {}
                 for field in item_elem.getchildren():
                     post[field.tag] = field.text
-                news.append(post)
-        return news
-
-
-if __name__ == '__main__':
-    p = ParserXml("example.xml")
-    p.parse_xml()
-    for n in p.get_posts():
-        print(n)
+                posts.append(post)
+        return posts
