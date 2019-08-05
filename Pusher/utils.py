@@ -2,16 +2,15 @@ import re
 import requests
 
 
-pattern = r'<div class="news-item__tags-line"> Теги (.*)</div>'
-patton = r'.*?title="(.*?)"'
-
-
 def get_tags_from_page(url):
 
     """
     :return: if url.status_code == 200, returns list of lowercase tags
              else returns an empty list
     """
+
+    pattern = r'<div class="news-item__tags-line"> Теги (.*)</div>'
+    patton = r'.*?title="(.*?)"'
 
     page = requests.get(url)
     if page.status_code == 200:
