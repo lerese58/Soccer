@@ -1,13 +1,11 @@
 import xml.etree.cElementTree as et
+import re
 
 
 class ParserXml:
 
-    def __init__(self, xml_file_path, xml_root=None):
+    def __init__(self, xml_file_path):
         self.file = xml_file_path
-        self.root = xml_root
-
-    def parse_xml(self):
         tree = et.ElementTree(file=self.file)
         self.root = tree.getroot()
 
@@ -19,4 +17,9 @@ class ParserXml:
                 for field in item_elem.getchildren():
                     post[field.tag] = field.text
                 posts.append(post)
+        posts = filter_out_ads(posts)
         return posts
+
+
+def filter_out_ads(items: list) -> list:
+    return [p for p in items if re.match(r'https://www\.sports\.ru/football/[0-9]+\.html', p.get('link')) is not None]
