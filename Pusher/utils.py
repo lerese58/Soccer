@@ -27,7 +27,7 @@ def get_tagged_posts():
 
 def get_tags_from_page(url):
     """
-    :return: returns list of founded lowercase tags
+    :return: list of found lowercase tags
     """
     div_pattern = r'<div class="news-item__tags-line"> Теги (.*)</div>'
     tag_name_pattern = r'.*?title="(.*?)"'
