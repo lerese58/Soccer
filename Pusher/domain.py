@@ -1,5 +1,7 @@
 from pymongo import MongoClient
 
+from Pusher import utils
+
 client = MongoClient('localhost', port=27018)  # standard port (27017) was already in use for some reason
 db = client.pusher_database
 
@@ -16,4 +18,5 @@ def insert_new_posts_dev(posts: list):
 
 
 if __name__ == '__main__':
-    insert_new_posts_dev()
+    posts = utils.pull_posts()
+    insert_new_posts_dev(posts)

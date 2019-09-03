@@ -4,18 +4,26 @@ import re
 import requests
 
 
-def download_xml():
-    with open('latest_posts.xml', 'w') as file:
+def pull_posts(posts_file='latest_posts.xml'):
+    print(download_xml(posts_file))
+    return get_tagged_posts(posts_file)
+
+
+def download_xml(posts_file='latest_posts.xml'):
+    """
+    :return: 200 in case everything is fine
+    """
+    with open(posts_file, 'w') as file:
         page = requests.get(const.XML_LINK)
         file.write(page.text)
         return page.status_code
 
 
-def get_tagged_posts():
+def get_tagged_posts(posts_file='latest_posts.xml'):
     """
     :return: posts_list; each post already has all the tags as an attribute
     """
-    with open('latest_posts.xml', 'r') as file:
+    with open(posts_file, 'r') as file:
         parser = xml_parser.ParserXml(file)
         posts = parser.get_posts()
         for post in posts:

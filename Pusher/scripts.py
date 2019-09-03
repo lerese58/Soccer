@@ -2,6 +2,8 @@ import requests
 import re
 import csv
 
+from Pusher import utils
+
 # this is a file made for all the funcs,
 # that will not be used in production,
 # but are essential for a development process
@@ -54,3 +56,7 @@ def get_best_leagues_teams_titles():
 
 # print(get_best_leagues_teams_titles())
 
+
+posts = utils.pull_posts()
+for post in posts:
+    print(post)
