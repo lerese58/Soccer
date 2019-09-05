@@ -1,6 +1,6 @@
 import json
 
-from Pusher import domain, utils
+from Pusher import utils
 from Puller import const
 
 if __name__ == '__main__':

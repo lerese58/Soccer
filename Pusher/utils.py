@@ -6,7 +6,7 @@ import json
 
 
 def download_xml():
-    with open('/home/lerese58/PycharmProjects/Soccer/latest_posts.xml', 'w') as file:
+    with open('../latest_posts.xml', 'w') as file:
         page = requests.get(const.XML_LINK)
         file.write(page.text)
         print(f"xml downloaded with code {page.status_code}")
@@ -22,7 +22,7 @@ def get_tagged_posts_from_xml():
     """
     :return: posts_list; each post already has all the tags as an attribute
     """
-    with open('/home/lerese58/PycharmProjects/Soccer/latest_posts.xml', 'r') as file:
+    with open('../latest_posts.xml', 'r') as file:
         parser = xml_parser.ParserXml(file)
         posts = parser.get_posts()
         print("parsed")
