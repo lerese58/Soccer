@@ -22,7 +22,10 @@ def decode_json(path: str):
 def get_tags_for(chat_id):
     print(f"collect tags for {chat_id}")
     users_tags = decode_json(USERS_PATH)
-    print(f"count of tags for {chat_id}: {len(users_tags.get(str(chat_id)))}")
+    if users_tags.get(str(chat_id)) is not None:
+        print(f"count of tags for {chat_id}: {len(users_tags.get(str(chat_id)))}")
+    else:
+        print(f"{chat_id} has no subscriptions")
     return users_tags.get(str(chat_id))
 
 

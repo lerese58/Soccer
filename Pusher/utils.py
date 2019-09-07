@@ -40,12 +40,12 @@ def get_tags_from_page(url):
     """
     div_pattern = r'<div class="news-item__tags-line"> Теги (.*)</div>'
     tag_name_pattern = r'.*?title="(.*?)"'
-    print(f'start get tags from {url}')
+    print(f'start getting tags from {url}')
     page = requests.get(url)
     tags_div = re.findall(div_pattern, page.text)[0]
     tags = re.findall(tag_name_pattern, tags_div)
     tags_lower = []
     for tag in tags:
         tags_lower.append(tag.lower())
-    print(f'finish get tags from {url}')
+    print(f'finish getting tags from {url}')
     return tags_lower
