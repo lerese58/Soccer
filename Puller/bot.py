@@ -4,7 +4,7 @@ import requests
 import Pusher.utils as pusher
 import Puller.utils as puller
 
-from Puller.const import TOKEN, LATEST_POSTS_PATH, USERS_PATH
+from Puller.settings import TOKEN, LATEST_POSTS_PATH, USERS_PATH
 
 session = requests.Session()
 session.verify = False

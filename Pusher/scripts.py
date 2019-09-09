@@ -57,6 +57,6 @@ def get_best_leagues_teams_titles():
 # print(get_best_leagues_teams_titles())
 
 
-posts = utils.pull_posts()
+posts = utils.get_posts()
 for post in posts:
     print(post)

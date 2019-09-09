@@ -1,4 +1,4 @@
-from Puller.const import USERS_PATH, LATEST_POSTS_PATH
+from Puller.settings import USERS_PATH, LATEST_POSTS_PATH
 import json
 
 
@@ -39,5 +39,5 @@ def get_option_tag_from_message(text: str):
     print(f"got {text}")
     command_and_option = text.split(sep=' ')
     option_tags = [option.lower() for option in command_and_option[1:]]
-    print(f'interpretered as {command_and_option[0]} {option_tags}')
+    print(f'interpreted as {command_and_option[0]} {option_tags}')
     return option_tags

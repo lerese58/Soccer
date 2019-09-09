@@ -18,5 +18,5 @@ def insert_new_posts_dev(posts: list):
 
 
 if __name__ == '__main__':
-    posts = utils.pull_posts()
+    posts = utils.get_posts()
     insert_new_posts_dev(posts)

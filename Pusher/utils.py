@@ -5,8 +5,23 @@ import requests
 import json
 
 
-def download_xml(xml_file='../latest_posts.xml'):
-    with open(xml_file, 'w') as file:
+def get_posts(xml_path='../latest_posts.xml'):
+    """
+    Downloads xml,
+    :return:
+    """
+    status = download_xml(xml_path)
+    if status == 200:
+        print("xml file successfully downloaded")
+    else:
+        print(f"xml.status_code == {status}")
+
+    posts = get_tagged_posts_from_xml(xml_path)
+    return posts
+
+
+def download_xml(xml_path='../latest_posts.xml'):
+    with open(xml_path, 'w') as file:
         page = requests.get(const.XML_LINK)
         file.write(page.text)
         print(f"xml downloaded with code {page.status_code}")
@@ -18,11 +33,11 @@ def make_json(obj, path):
         json.dump(obj, file, ensure_ascii=False)
 
 
-def get_tagged_posts_from_xml(xml_file='../latest_posts.xml'):
+def get_tagged_posts_from_xml(xml_path='../latest_posts.xml'):
     """
     :return: posts_list; each post already has all the tags as an attribute
     """
-    with open(xml_file, 'r') as file:
+    with open(xml_path, 'r') as file:
         parser = xml_parser.ParserXml(file)
         posts = parser.get_posts()
         print("parsed")
@@ -30,7 +45,7 @@ def get_tagged_posts_from_xml(xml_file='../latest_posts.xml'):
             page_url = post['link']
             tags = get_tags_from_page(page_url)
             post['tags'] = tags
-        print("posts is ready")
+        print("posts are ready")
         return posts
 
 
