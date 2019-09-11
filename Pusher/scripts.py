@@ -1,7 +1,9 @@
 import requests
 import re
 
-# this is a file made for all the funcs,
+from settings import ALL_TAGS_PATH
+
+# this file is made for all the funcs,
 # that will not be used in production,
 # but are essential for a development process
 
@@ -48,7 +50,7 @@ def get_best_leagues_teams_titles():
     return leagues_list
 
 
-def get_teams_tags():
+def get_teams_tags(path=ALL_TAGS_PATH):
 
     """
     This function grabs tags of all teams in 'leagues' and writes them down in 'all_tags.txt'
@@ -83,8 +85,7 @@ def get_teams_tags():
 
         for team_link in team_links:
             team_page = requests.get(team_link)
-    
-            # IT WORKS!
+
             tag = re.search(club_tag_pattern, team_page.text)
             if tag:
                 tag = tag.group(1).lower()
@@ -92,7 +93,7 @@ def get_teams_tags():
                 tags.append(tag)
 
     tags = sorted(tags)
-    with open('../DataTransfer/all_tags.txt', 'w') as file:
+    with open(path, 'w') as file:
         for tag in tags:
             file.write(tag + '\n')
 

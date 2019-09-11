@@ -1,11 +1,12 @@
-from Pusher import xml_parser, const
+from Pusher import xml_parser
+from settings import LATEST_POSTS_XML_PATH, XML_LINK
 
 import re
 import requests
 import json
 
 
-def get_posts(xml_path='../latest_posts.xml'):
+def get_posts(xml_path=LATEST_POSTS_XML_PATH):
     """
     Downloads xml,
     :return:
@@ -20,9 +21,9 @@ def get_posts(xml_path='../latest_posts.xml'):
     return posts
 
 
-def download_xml(xml_path='../latest_posts.xml'):
+def download_xml(xml_path=LATEST_POSTS_XML_PATH):
     with open(xml_path, 'w') as file:
-        page = requests.get(const.XML_LINK)
+        page = requests.get(XML_LINK)
         file.write(page.text)
         print(f"xml downloaded with code {page.status_code}")
         return page.status_code
@@ -33,7 +34,7 @@ def make_json(obj, path):
         json.dump(obj, file, ensure_ascii=False)
 
 
-def get_tagged_posts_from_xml(xml_path='../latest_posts.xml'):
+def get_tagged_posts_from_xml(xml_path=LATEST_POSTS_XML_PATH):
     """
     :return: posts_list; each post already has all the tags as an attribute
     """

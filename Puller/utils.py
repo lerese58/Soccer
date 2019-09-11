@@ -1,10 +1,10 @@
-from Puller.settings import USERS_PATH, LATEST_POSTS_PATH
+from settings import USERS_PATH, LATEST_POSTS_JSON_PATH
 import json
 
 
 def get_posts_for(tags: list):
     print("collecting posts...")
-    posts = decode_json(LATEST_POSTS_PATH)
+    posts = decode_json(LATEST_POSTS_JSON_PATH)
     posts_for_message = []
     for tag in tags:
         for post in posts:
@@ -20,7 +20,7 @@ def decode_json(path: str):
 
 
 def get_tags_for(chat_id):
-    print(f"collect tags for {chat_id}")
+    print(f"collecting tags for {chat_id}")
     users_tags = decode_json(USERS_PATH)
     if users_tags.get(str(chat_id)) is not None:
         print(f"count of tags for {chat_id}: {len(users_tags.get(str(chat_id)))}")
@@ -31,7 +31,7 @@ def get_tags_for(chat_id):
 
 def build_message(post):
     message_text = f"*{post.get('title')}*\n\n" + f"{post.get('description')}" + f"\n\nLink: {post.get('link')}"
-    print(f"message {post.get('title')} is builded")
+    print(f"message {post.get('title')} is built")
     return message_text
 
 
