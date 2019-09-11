@@ -78,4 +78,11 @@ def send_my_tags(message):
     bot.send_message(chat_id, text=message_text)
 
 
+@bot.message_handler(commands=['alltags', 'all'])
+def send_all_tags(message):
+    tags = puller.parse_all_tags_txt()
+    message_text = str(tags)
+    bot.send_message(message.chat.id, text=message_text)
+
+
 bot.polling(none_stop=True)
