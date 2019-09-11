@@ -1,8 +1,5 @@
 import requests
 import re
-import csv
-
-from Pusher import utils
 
 # this is a file made for all the funcs,
 # that will not be used in production,
@@ -28,12 +25,10 @@ def get_best_leagues_teams_titles():
         ['https://www.sports.ru/ligue-1/table/', 'Франция'],
     ]
 
-    # slug_pattern = r'href="https://www.sports.ru/(.*)/"'
     title_pattern = r'title="(.*)"'
 
     leagues_list = []  # this list is for teams in all leagues
 
-    # with open('teams.csv', 'w'):
     for i in range(len(leagues)):
 
         link, country = leagues[i]
@@ -45,7 +40,6 @@ def get_best_leagues_teams_titles():
         teams_titles = []  # this list is for teams within one league
 
         for team in teams:
-            # slug = re.findall(slug_pattern, team)[0]
             title = re.findall(title_pattern, team)[0]
             teams_titles.append(title)
 
@@ -54,9 +48,57 @@ def get_best_leagues_teams_titles():
     return leagues_list
 
 
-# print(get_best_leagues_teams_titles())
+def get_teams_tags():
+
+    """
+    This function grabs tags of all teams in 'leagues' and writes them down in 'all_tags.txt'
+    :return:
+    """
+
+    leagues = [
+        ['https://www.sports.ru/epl/table/', 'Англия'],
+        ['https://www.sports.ru/la-liga/table/', 'Испания'],
+        ['https://www.sports.ru/rfpl/table/', 'Россия'],
+        ['https://www.sports.ru/seria-a/table/', 'Италия'],
+        ['https://www.sports.ru/bundesliga/table/', 'Германия'],
+        ['https://www.sports.ru/ligue-1/table/', 'Франция'],
+    ]
+    
+    tags = []
+    pattern_head = r'<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="icon-flag icon-flag_\d{4} flag-s flag-\d{4}" title="'
+    pattern_tale = r'"></i><a class="name" href="(.*)" title='
+
+    club_tag_pattern = r'<h1 class="titleH1">(.*)\r\n<span class="matches-img">'
+    
+    for i in range(len(leagues)):
+
+        link, country = leagues[i]
+        pattern = pattern_head + country + pattern_tale
+
+        page = requests.get(link)
+        team_links = re.findall(pattern, page.text)
+
+        print()
+        print('GETTING TAGS FROM ' + country.upper())
+
+        for team_link in team_links:
+            team_page = requests.get(team_link)
+    
+            # IT WORKS!
+            tag = re.search(club_tag_pattern, team_page.text)
+            if tag:
+                tag = tag.group(1).lower()
+                print(tag)
+                tags.append(tag)
+
+    tags = sorted(tags)
+    with open('../DataTransfer/all_tags.txt', 'w') as file:
+        for tag in tags:
+            file.write(tag + '\n')
 
 
-posts = utils.get_posts()
-for post in posts:
-    print(post)
+# posts = utils.get_posts()
+# for post in posts:
+#     print(post)
+
+get_teams_tags()
