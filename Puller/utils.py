@@ -41,3 +41,16 @@ def get_option_tag_from_message(text: str):
     option_tags = [option.lower() for option in command_and_option[1:]]
     print(f'interpreted as {command_and_option[0]} {option_tags}')
     return option_tags
+
+
+def parse_all_tags_txt(path='../DataTransfer/all_tags.txt'):
+    """
+    :param path: in case you need to parse another file
+    :return: list of tags
+    """
+
+    with open(path, 'r') as file:
+        tags = list()
+        for line in file:
+            tags.append(line.rstrip())
+        return tags
