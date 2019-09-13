@@ -5,6 +5,8 @@ import re
 import requests
 import json
 
+from datetime import datetime
+
 
 def get_posts(xml_path=LATEST_POSTS_XML_PATH):
     """
@@ -65,3 +67,7 @@ def get_tags_from_page(url):
         tags_lower.append(tag.lower())
     print(f'finished getting tags from {url}')
     return tags_lower
+
+
+def datetime_from(str_date):
+    return datetime.strptime(str_date[:-6], "%a, %d %b %Y %H:%M:%S")
