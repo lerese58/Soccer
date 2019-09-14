@@ -1,11 +1,14 @@
 from Pusher import xml_parser
 from settings import LATEST_POSTS_XML_PATH, XML_LINK
+from Puller import utils
 
 import re
 import requests
 import json
 
 from datetime import datetime
+
+ALL_TAGS = utils.parse_all_tags_txt()
 
 
 def get_posts(xml_path=LATEST_POSTS_XML_PATH):
@@ -64,7 +67,8 @@ def get_tags_from_page(url):
     tags = re.findall(tag_name_pattern, tags_div)
     tags_lower = []
     for tag in tags:
-        tags_lower.append(tag.lower())
+        if tag.lower() in ALL_TAGS:
+            tags_lower.append(tag.lower())
     print(f'finished getting tags from {url}')
     return tags_lower
 
