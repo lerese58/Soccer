@@ -1,11 +1,12 @@
 from Pusher import xml_parser
-from settings import XML_LINK, LATEST_POSTS_XML_PATH
+import settings
+
 import requests
 
 if __name__ == '__main__':
-    with open(LATEST_POSTS_XML_PATH, 'w') as file:
-        file.write(requests.get(XML_LINK).text)
-    with open(LATEST_POSTS_XML_PATH, 'r') as file:
+    with open('../latest_posts.xml', 'w') as file:
+        file.write(requests.get(settings.XML_LINK).text)
+    with open('../latest_posts.xml', 'r') as file:
         parser = xml_parser.ParserXml(file)
         posts = parser.get_posts()
         count = 0
