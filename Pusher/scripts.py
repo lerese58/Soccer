@@ -96,10 +96,3 @@ def get_teams_tags(path=ALL_TAGS_PATH):
     with open(path, 'w') as file:
         for tag in tags:
             file.write(tag + '\n')
-
-
-# posts = utils.get_posts()
-# for post in posts:
-#     print(post)
-
-get_teams_tags()
