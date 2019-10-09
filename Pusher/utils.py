@@ -36,7 +36,7 @@ def download_xml(xml_path=LATEST_POSTS_XML_PATH):
 
 def make_json(obj, path):
     with open(path, 'w') as file:
-        json.dump(obj, file, ensure_ascii=False)
+        json.dump(obj, file, ensure_ascii=False, indent=2)
 
 
 def get_tagged_posts_from_xml(xml_path=LATEST_POSTS_XML_PATH):
@@ -57,6 +57,7 @@ def get_tagged_posts_from_xml(xml_path=LATEST_POSTS_XML_PATH):
 
 def get_tags_from_page(url):
     """
+    :param url: post page link
     :return: list of found lowercase tags
     """
     div_pattern = r'<div class="news-item__tags-line"> Теги (.*)</div>'

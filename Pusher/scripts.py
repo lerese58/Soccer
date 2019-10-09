@@ -3,9 +3,11 @@ import re
 
 from settings import ALL_TAGS_PATH
 
-# this file is made for all the funcs,
-# that will not be used in production,
-# but are essential for a development process
+"""
+this file is made for all the funcs,
+that will not be used in production,
+but are essential for a development process
+"""
 
 
 def get_best_leagues_teams_titles():
