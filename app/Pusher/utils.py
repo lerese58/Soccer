@@ -1,6 +1,6 @@
-from Pusher import xml_parser
-from settings import LATEST_POSTS_XML_PATH, XML_LINK
-from Puller import utils
+from app.Pusher import xml_parser
+from app.config import LATEST_POSTS_XML_PATH, XML_LINK
+from app.Puller import utils
 
 import re
 import requests

@@ -1,4 +1,4 @@
-from settings import USERS_PATH, LATEST_POSTS_JSON_PATH
+from app.config import USERS_PATH, LATEST_POSTS_JSON_PATH
 import json
 
 

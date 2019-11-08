@@ -1,7 +1,7 @@
 import requests
 import re
 
-from settings import ALL_TAGS_PATH
+from app.config import ALL_TAGS_PATH
 
 """
 this file is made for all the funcs,

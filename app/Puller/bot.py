@@ -1,10 +1,10 @@
 import telebot
 import requests
 
-import Pusher.utils as pusher
-import Puller.utils as puller
+import app.Pusher.utils as pusher
+import app.Puller.utils as puller
 
-from settings import TOKEN, USERS_PATH
+from app.config import TOKEN, USERS_PATH
 
 session = requests.Session()
 session.verify = False
