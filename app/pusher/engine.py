@@ -1,17 +1,29 @@
 import pymongo
 import os
+import datetime
+import ssl
 
-db_user = os.environ.get('DB_USER', 'albertshady')
-db_pass = os.environ.get('DB_PASS', 'tyJtiw-vazhy1-risxyr')
+db_user = os.environ.get('DB_USER')
+db_pass = os.environ.get('DB_PASS')
+db_cluster = os.environ.get('DB_CLUSTER')
 
-client = pymongo.MongoClient(
-   f'mongodb://{db_user}:<{db_pass}>@shadycluster-iawb7.mongodb.net/test?retryWrites=true&w=majority')
+connection_string = f'mongodb+srv://{db_user}:{db_pass}@{db_cluster}.mongodb.net/test?retryWrites=true&w=majority'
 
-db = client.test
+client = pymongo.MongoClient(connection_string,
+                             ssl=True,
+                             ssl_cert_reqs=ssl.CERT_NONE)
+
+db = client.soccer
+
+posts = db.posts
+
+post = {"author": "Mike",
+        "text": "My first blog post!",
+        "tags": ["mongodb", "python", "pymongo"],
+        "date": datetime.datetime.utcnow()}
 
 
-# if __name__ == '__main__':
-#     print(db_user, db_pass)
-
-# db_user = 'albertshady'
-# db_pass = 'tyJtiw-vazhy1-risxyr'
+if __name__ == '__main__':
+    print(connection_string)
+    post_id = posts.insert_one(post).inserted_id
+    print(post_id)

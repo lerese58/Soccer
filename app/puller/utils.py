@@ -43,7 +43,7 @@ def get_option_tag_from_message(text: str):
     return option_tags
 
 
-def parse_all_tags_txt(path='../data_transfer/all_tags.txt'):
+def parse_all_tags_txt(path='../models/all_tags.txt'):
     """
     :param path: in case you need to parse another file
     :return: list of tags
