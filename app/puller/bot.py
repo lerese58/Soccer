@@ -1,8 +1,8 @@
 import telebot
 import requests
 
-import app.Pusher.utils as pusher
-import app.Puller.utils as puller
+import app.pusher.utils as pusher
+import app.puller.utils as puller
 
 from app.config import TOKEN, USERS_PATH
 

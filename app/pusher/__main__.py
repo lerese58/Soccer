@@ -1,6 +1,6 @@
 import json
 
-from app.Pusher import utils
+from app.pusher import utils
 from app import config
 
 if __name__ == '__main__':
